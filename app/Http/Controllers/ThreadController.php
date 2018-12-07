@@ -38,7 +38,7 @@ class ThreadController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'subject' => 'required|min:10',
+            'subject' => 'required|min:5',
             'type' => 'required',
             'thread' => 'required|min:20'
         ]);
@@ -72,7 +72,7 @@ class ThreadController extends Controller
      */
     public function edit(Thread $thread)
     {
-        //
+        return view('thread.edit')->with('thread',$thread);
     }
 
     /**
@@ -84,7 +84,18 @@ class ThreadController extends Controller
      */
     public function update(Request $request, Thread $thread)
     {
-        //
+        $this->validate($request,[
+            'subject' => 'required|min:5',
+            'type' => 'required',
+            'thread' => 'required|min:20'
+        ]);
+
+
+
+        $thread->update($request->all());
+
+
+        return redirect()->route('thread.show',$thread->id)->with('msg','Thread Updated!!');
     }
 
     /**
@@ -95,6 +106,10 @@ class ThreadController extends Controller
      */
     public function destroy(Thread $thread)
     {
-        //
+        $thread->delete();
+
+        return redirect()->route('thread.index')->with('msg','Thread Deleted!!');
     }
+
+
 }
