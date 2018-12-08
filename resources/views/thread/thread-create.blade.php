@@ -2,9 +2,6 @@
 
 @section('content')
 
-@include('layouts.partials.form-error')
-
-@include('layouts.partials.form-success')
 
     <div class="row">
         <div class=" well">

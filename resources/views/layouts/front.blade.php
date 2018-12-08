@@ -34,6 +34,9 @@
 
 <div class="container">
 
+    @include('layouts.partials.form-error')
+
+    @include('layouts.partials.form-success')
 
 
 
@@ -58,6 +61,6 @@
 
 
 <script src="{{ asset('js/app.js') }}"></script>
-<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+{{--<script src="{{ asset('bootstrap.min.js') }}"></script>--}}
 </body>
 </html>
