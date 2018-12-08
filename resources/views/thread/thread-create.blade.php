@@ -26,6 +26,13 @@
                     <textarea class="form-control" name="thread" id="" placeholder="Input..."
                               value="{{old('thread')}}"> </textarea>
                 </div>
+                <br/>
+                <div class="form-group">
+                    {!! NoCaptcha::renderJs() !!}
+                    {!! NoCaptcha::display(['data-theme' => 'dark']) !!}
+                </div><br/>
+
+
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
