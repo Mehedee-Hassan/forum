@@ -35,46 +35,15 @@
 <div class="container">
 
 
-    <div class="row">
-        <div class="row content-heading ">
-            <div class="col-md-3"><h4>Category</h4></div>
-            <div class="col-md-9 ">
-                <div class="row">
-                    <div class="col-md-4 "><h4 class="main-content-heading">@yield('heading')</h4>
-                    </div>
-                    <div class="col-md-offset-6 col-md-2">
-                        <a class="btn btn-primary"  href="{{route('thread.create')}}">Create Thread</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
     <div class="row">
-        <div class="col-md-3">
-            <ul class="list-group">
-                <a href="{{ route('thread.index') }}" class="list-group-item">
-                    All Threads
-                    <span class="badge badge-info ">14</span>
-                </a>
-                <a href="#" class="list-group-item">
-                    JAVA
-                    <span class="badge  badge-info ">14</span>
-                </a>
-                <a href="#" class="list-group-item">
-                    PHP
-                    <span class="badge badge-info  badge-info ">3</span>
-                </a>
-                <a href="#" class="list-group-item">
-                    PYTHON
-                    <span class="badge badge-info ">5</span>
-                </a>
 
-            </ul>
-        </div>
-
+       @section('category')
+            @include('layouts.partials.category')
+        @show
         <div class="col-md-9">
+            <div class="row content-heading"><h4>@yield('heading')</h4> </div>
             <div class="content-wrap well">
                 @yield('content')
             </div>

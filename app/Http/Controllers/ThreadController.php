@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class ThreadController extends Controller
 {
+
+
+    function __construct()
+    {
+        return $this->middleware('auth')->except('index');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -44,9 +51,10 @@ class ThreadController extends Controller
         ]);
 
 
-        \App\Thread::create($request->all());
+//        \App\Thread::create($request->all());
 
 
+        auth()->user()->threads()->create($request->all());
 
 
         return redirect()->back()->with('msg','Thread Created!!');
@@ -84,6 +92,13 @@ class ThreadController extends Controller
      */
     public function update(Request $request, Thread $thread)
     {
+
+
+        if(auth()->user()->id != $thread->user_id){
+            abort('401','user not authorized');
+        }
+
+
         $this->validate($request,[
             'subject' => 'required|min:5',
             'type' => 'required',
