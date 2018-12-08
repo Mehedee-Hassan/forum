@@ -80,13 +80,39 @@
                         {{method_field('DELETE')}}
                         <input class="btn btn-xs btn-danger" type="submit" value="Delete"/>
                     </form>
-
+                    <button type="button" class="btn btn-info btn-xs" value="reply" onclick="toggleReply({{ $comment->id }})">Reply</button>
                 </div>
             @endif
 
             <br>
+            {{--reply form--}}
+
+
+
+                <div class="reply-form-{{ $comment->id }} hidden">
+
+                    <div  class="reply-form margin-left-20">
+
+                        <form action="{{route('replycomment.store',$comment)}}" method="post" role="form">
+
+                            {{ csrf_field() }}
+
+                            <legend><small>Reply</small></legend>
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="body" id="body" placeholder="reply..." />
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-sm">Reply</button>
+                        </form>
+                        <br>
+
+
+                    </div>
+                </div>
+
             {{--reply to comment--}}
-                @foreach($comment->comments as $reply)
+
+            @foreach($comment->comments as $reply)
                     <div class="small well text-info margin-left-20" >
                         <p>{{$reply->body}}</p>
                         -<lead>{{ $reply->user->name }}</lead>
@@ -145,24 +171,6 @@
                 @endforeach
 
 
-            {{--reply form--}}
-            <div  class="reply-form margin-left-20">
-
-                <form action="{{route('replycomment.store',$comment)}}" method="post" role="form">
-
-                    {{ csrf_field() }}
-
-                    <legend><small>Reply</small></legend>
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="body" id="body" placeholder="reply..." />
-                    </div>
-
-                    <button type="submit" class="btn btn-primary btn-sm">Reply</button>
-                </form>
-                <br>
-
-
-            </div>
             <hr/>
         @endforeach
     </div>
@@ -190,3 +198,18 @@
 
 
 @endsection
+
+
+@section('js')
+
+    <script>
+
+
+        function toggleReply(commentId) {
+
+            console.log('test');
+            $('.reply-form-'+commentId).toggleClass('hidden');
+        }
+    </script>
+@endsection
+
