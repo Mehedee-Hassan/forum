@@ -3,6 +3,9 @@
 
 @section('content')
 
+    <div class="content-wrap well">
+
+
     <h4>{{ $thread->subject  }}</h4>
     <hr>
 
@@ -23,6 +26,7 @@
 
         </div>
     @endif
+    </div>
 
     <br>
     <br>
@@ -60,7 +64,7 @@
                                         </div>
 
 
-                                        <button type="submit" class="btn btn-primary">Comment</button>
+                                        <button type="submit" class="btn btn-primary">Save</button>
                                     </form>
                                 </div>
                                 <div class="modal-footer">
@@ -80,12 +84,12 @@
                 </div>
             @endif
 
-
+            <br>
             {{--reply to comment--}}
                 @foreach($comment->comments as $reply)
-                    <div class="small well text-info">
+                    <div class="small well text-info margin-left-20" >
                         <p>{{$reply->body}}</p>
-                        --<lead>{{ $reply->user->name }}</lead>
+                        -<lead>{{ $reply->user->name }}</lead>
 
                         <br>
                         <br>
@@ -94,7 +98,7 @@
                         @if(auth()->user()->id == $comment->user->id)
                             <div class="action">
 
-                                <a class="btn btn-primary btn-xs" data-toggle="modal" href="#{{ $reply->id }}">Edit reply</a>
+                                <a class="btn btn-primary btn-xs" data-toggle="modal" href="#{{ $reply->id }}">Edit</a>
 
 
                                 <div class="modal fade" id="{{ $reply->id }}">
@@ -116,7 +120,7 @@
                                                     </div>
 
 
-                                                    <button type="submit" class="btn btn-primary">Reply</button>
+                                                    <button type="submit" class="btn btn-primary">Save</button>
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
@@ -130,7 +134,7 @@
                                 <form action="{{ route('comment.destroy',$reply->id) }}" method="post" class="inline-it">
                                     {{ csrf_field() }}
                                     {{method_field('DELETE')}}
-                                    <input class="btn btn-xs btn-danger" type="submit" value="Delete Reply"/>
+                                    <input class="btn btn-xs btn-danger" type="submit" value="Delete"/>
                                 </form>
 
                             </div>
@@ -142,7 +146,7 @@
 
 
             {{--reply form--}}
-            <div  class="reply-form">
+            <div  class="reply-form margin-left-20">
 
                 <form action="{{route('replycomment.store',$comment)}}" method="post" role="form">
 
@@ -182,7 +186,6 @@
 
 
     </div>
-
 
 
 

@@ -47,7 +47,7 @@
         @show
         <div class="col-md-9">
             <div class="row content-heading"><h4>@yield('heading')</h4> </div>
-            <div class="content-wrap well">
+            <div class="content-wrap">
                 @yield('content')
             </div>
         </div>
