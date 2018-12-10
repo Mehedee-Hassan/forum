@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Thread;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class ThreadController extends Controller
 {
@@ -45,16 +46,16 @@ class ThreadController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'subject' => 'required|min:5',
+            'subject' => 'required|min:1',
             'type' => 'required',
-            'thread' => 'required|min:20'
+            'thread' => 'required|min:10'
         ]);
 
 
 //        \App\Thread::create($request->all());
 
 
-        auth()->user()->threads()->create($request->all());
+        auth()->user()->threads()->create($request->except('g-recaptcha-response'));
 
 
         return redirect()->back()->with('msg','Thread Created!!');
@@ -126,5 +127,24 @@ class ThreadController extends Controller
         return redirect()->route('thread.index')->with('msg','Thread Deleted!!');
     }
 
+
+
+    public function markAsSolution(){
+        $solutionId = Input::get('solutionId');
+        $threadId=Input::get('threadId');
+        $thread= \App\Thread::find($threadId);
+        $thread->solution = $solutionId;
+
+        if($thread->save()){
+
+
+            if(request()->ajax()){
+
+                return response()->json(['status'=>'success','msg'=>'Marked as solution!!']);
+
+            }
+            return back()->with('msg','Mark as solution');
+        }
+    }
 
 }
