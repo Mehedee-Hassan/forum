@@ -35,3 +35,7 @@ Route::post('reply/create/{comment}','CommentController@addReplyComment')->name(
 Route::post('markAsSolution','ThreadController@markAsSolution')->name('markAsSolution');
 
 Route::post('likeIt','LikeController@toggleLike')->name('likeIt');
+
+
+
+Route::get('/user/profile/{user}','UserProfileController@index')->name('userProfile');

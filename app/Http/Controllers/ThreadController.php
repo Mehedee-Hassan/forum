@@ -81,6 +81,8 @@ class ThreadController extends Controller
      */
     public function edit(Thread $thread)
     {
+        
+        $this->authorize('update',$thread);
         return view('thread.edit')->with('thread',$thread);
     }
 
@@ -95,10 +97,12 @@ class ThreadController extends Controller
     {
 
 
-        if(auth()->user()->id != $thread->user_id){
-            abort('401','user not authorized');
-        }
+        // if(auth()->user()->id != $thread->user_id){
+        //     abort('401','user not authorized');
+        // }
 
+
+        $this->authorize('update',$thread);
 
         $this->validate($request,[
             'subject' => 'required|min:5',
