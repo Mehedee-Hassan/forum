@@ -30,9 +30,9 @@
 
     <h3>{{$user->name}}'s latest Comments</h3>
 
-    @forelse($comments as $comment)
-        <h5>{{$user->name}} commented on <a href="{{route('thread.show',$comment->commentable->id)}}">{{$comment->commentable->subject}}</a>  {{$comment->created_at->diffForHumans()}}</h5>
-    @empty
+   @forelse($comments as $comment)
+     <h5>{{$user->name}} commented on <a href="{{route('thread.show',$comment->commentable->id)}}">{{$comment->commentable->subject}}</a>{{$comment->created_at->diffForHumans()}}</h5>
+   @empty
     <h5>No comments yet</h5>
     @endforelse
 </div>

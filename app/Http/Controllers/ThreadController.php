@@ -81,8 +81,6 @@ class ThreadController extends Controller
      */
     public function edit(Thread $thread)
     {
-        
-        $this->authorize('update',$thread);
         return view('thread.edit')->with('thread',$thread);
     }
 

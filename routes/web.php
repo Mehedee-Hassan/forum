@@ -11,6 +11,7 @@
 |
 */
 
+
 Route::get('/', function () {
 
     $threads = \App\Thread::paginate(3);
@@ -23,7 +24,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-Route::resource('/thread','ThreadController');
+Route::resource('thread','ThreadController');
 
 Route::resource('comment','CommentController',['only'=>['update','destroy']]);
 
@@ -38,4 +39,11 @@ Route::post('likeIt','LikeController@toggleLike')->name('likeIt');
 
 
 
-Route::get('/user/profile/{user}','UserProfileController@index')->name('userProfile');
+Route::get('/user/profile/{user}','UserProfileController@index')->name('user_profile');
+
+
+
+Route::get('/markAsRead',function(){
+
+	auth()->user()->unreadNotifications->markAsRead();
+});

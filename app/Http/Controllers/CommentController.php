@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App;
 use App\Thread;
+use App\Notifications\RepliedToThread;
+
+
+
 class CommentController extends Controller
 {
 
@@ -29,7 +33,17 @@ class CommentController extends Controller
 //
 //        $thread->comments()->save($comment);
 
+
+
+
         $thread->addComment($request->body);
+
+//        dd($thread->user);
+
+        $thread->user->notify(new RepliedToThread($thread));
+
+
+//        dd($thread->user);
 
         return back()->with('msg','comment created');
 

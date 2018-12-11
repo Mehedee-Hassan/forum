@@ -24,9 +24,15 @@
     {{--<link href="https://bootswatch.com/3/lumen/bootstrap.min.css" rel="stylesheet">--}}
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
 
+    <script>
+        window.Laravel = {!! json_encode([
+            'csrfToken' => csrf_token(),
+        ]) !!};
+    </script>
+
 </head>
 <body>
-
+<div id="">
 @include('layouts.partials.navbar')
 
 @yield('banner')
@@ -61,8 +67,10 @@
 
 
 <script src="{{ asset('js/app.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
 {{--<script src="{{ asset('bootstrap.min.js') }}"></script>--}}
 @yield('js')
 
+</div>
 </body>
 </html>
